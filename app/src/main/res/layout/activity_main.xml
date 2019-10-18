@@ -1,5 +1,6 @@
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -18,18 +19,38 @@
                 android:id="@+id/verdad_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/verdad_button" />
+                android:text="@string/verdad_button"
+                tools:ignore="ButtonStyle" />
         <Button
                 android:id="@+id/falso_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/falso_button" />
+                android:text="@string/falso_button"
+                tools:ignore="ButtonStyle" />
     </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
         <Button
-                android:id="@+id/siguiente_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/boton_anterior"
+                android:layout_width="41dp"
+                android:layout_height="match_parent"
+
+                android:drawableEnd="@mipmap/arrow_left"
+                tools:ignore="ButtonStyle" />
+
+        <Button
+                android:id="@+id/boton_siguiente"
+                android:layout_width="41dp"
+                android:layout_height="match_parent"
                 android:drawableEnd="@mipmap/arrow_right"
-                android:text="@string/siguiente_button"/>
+                tools:ignore="ButtonStyle">
+
+        </Button>
+
+    </LinearLayout>
 
 </LinearLayout>

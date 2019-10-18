@@ -2,6 +2,7 @@ package io.github.n0g4y0.cochatest
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var botonVerdad : Button
     private lateinit var botonFalso : Button
     private lateinit var botonSiguiente : Button
+    private lateinit var botonAnterior : Button
 
 
     private var indiceActual = 0
@@ -33,7 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         botonVerdad = findViewById(R.id.verdad_button)
         botonFalso = findViewById(R.id.falso_button)
-        botonSiguiente = findViewById(R.id.siguiente_button)
+        botonSiguiente = findViewById(R.id.boton_siguiente)
+        botonAnterior = findViewById(R.id.boton_anterior)
 
         botonVerdad.setOnClickListener {view : View ->
             verificarRespuesta(true)
@@ -45,10 +48,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         botonSiguiente.setOnClickListener {
-                indiceActual = indiceActual + 1
-                actualizarPregunta()
-        }
 
+            if(indiceActual < bancoPreguntas.size-1) {
+                indiceActual++
+                actualizarPregunta()
+            }else{
+                if(indiceActual == bancoPreguntas.size-1){
+                    indiceActual = 0
+                    actualizarPregunta()
+                }
+            }
+        }
+        botonAnterior.setOnClickListener {
+
+            if(indiceActual > 0) {
+                indiceActual--
+                actualizarPregunta()
+            }else {
+                if (indiceActual == 0) {
+                    indiceActual = bancoPreguntas.size - 1
+                    actualizarPregunta()
+                }
+            }
+        }
         actualizarPregunta()
     }
 
@@ -61,13 +83,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun verificarRespuesta(respuestaUsuario: Boolean){
 
-            val respuestaCorrecta = bancoPreguntas[indiceActual].respuesta
-            val mostrarMensajeID =  if (respuestaUsuario == respuestaCorrecta){
-                "Correcto"
-            } else {
-                "Incorrecto"
-            }
-            Toast.makeText(this,mostrarMensajeID,Toast.LENGTH_SHORT).show()
+        val respuestaCorrecta = bancoPreguntas[indiceActual].respuesta
+        val mostrarMensajeID =  if (respuestaUsuario == respuestaCorrecta){
+            "Correcto"
+        } else {
+            "Incorrecto"
+        }
+
+        val t = Toast.makeText(this, mostrarMensajeID,Toast.LENGTH_SHORT)
+        t.setGravity(Gravity.TOP,0,0)
+        t.show()
 
     }
 }
